@@ -1,0 +1,38 @@
+{
+  "tableName": "cr123_lead",
+  "displayName": "Lead",
+  "description": "Custom table to store incoming sales leads.",
+  "columns": [
+    {
+      "logicalName": "cr123_leadid",
+      "displayName": "Lead",
+      "type": "Uniqueidentifier",
+      "isPrimaryId": true
+    },
+    {
+      "logicalName": "cr123_fullname",
+      "displayName": "Full Name",
+      "type": "String",
+      "maxLength": 100,
+      "isPrimaryName": true
+    },
+    {
+      "logicalName": "cr123_email",
+      "displayName": "Email Address",
+      "type": "String",
+      "maxLength": 100
+    },
+    {
+      "logicalName": "cr123_territory",
+      "displayName": "Territory",
+      "type": "Picklist",
+      "options": ["North America", "EMEA", "APAC", "LATAM"]
+    },
+    {
+      "logicalName": "cr123_status",
+      "displayName": "Review Status",
+      "type": "Status",
+      "options": ["New", "Contacted", "Qualified", "Disqualified"]
+    }
+  ]
+}
