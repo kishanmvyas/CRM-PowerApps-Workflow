@@ -1,8 +1,9 @@
 <div align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo" width="120" />
-  <h1>Enterprise CRM Workflow Management</h1>
-  <p><strong>A robust Customer Relationship Management solution built with Microsoft PowerApps & Power Automate.</strong></p>
+  <h1>CRM Workflow Automation Demonstration</h1>
+  <p><strong>A foundational Customer Relationship Management solution built with Microsoft PowerApps & Power Automate.</strong></p>
   
+  [![Author](https://img.shields.io/badge/Developed_by-Kishan_Vyas-0078D4?style=for-the-badge)]()
   [![PowerApps](https://img.shields.io/badge/PowerApps-Microsoft-0078D4?style=for-the-badge&logo=microsoft)](https://powerapps.microsoft.com/)
   [![Power Automate](https://img.shields.io/badge/Power_Automate-Workflow-0078D4?style=for-the-badge&logo=microsoft)](https://powerautomate.microsoft.com/)
 </div>
@@ -10,24 +11,24 @@
 <br />
 
 ![Reference Dashboard UI Overview](./assets/crm_dashboard_mockup.png)
-*Figure: Reference Dashboard UI Overview*
+*Figure: Reference Dashboard UI Overview (Kishan Vyas)*
 
 ## Project Overview
-This repository contains the architecture, schema definitions, and exported workflows for an Enterprise CRM System built on the Microsoft Power Platform.
+This repository contains the architecture, schema definitions, and exported workflows for a CRM System built as a demonstration on the Microsoft Power Platform.
 
-The solution replaces legacy manual spreadsheet-based lead tracking methods. By implementing a centralized Dataverse schema, a responsive Canvas PowerApp, and logic via Power Automate, the system reduces manual data entry and enforces standard sales processes.
+The solution was developed to showcase proficiency in implementing a centralized Dataverse schema, building a responsive Canvas PowerApp, and engineering automated logic via Power Automate. It aims to demonstrate how manual data entry can be reduced and standard sales processes can be enforced using modern low-code tools.
 
-### Key Features & Impact
-* **Automated Lead Routing:** Decreased lead assignment processing time significantly.
-* **Unified Dashboard:** Provides sales teams with a centralized view for leads, opportunities, and accounts.
-* **Data Integrity:** Limits duplicate CRM entries by leveraging Dataverse alternate keys and Power Automate validation.
-* **Notifications:** Standard Outlook and Teams notifications mapped to opportunity stage changes.
+### Key Capabilities Demonstrated
+* **Automated Lead Routing:** Architected flows that dynamically assign leads based on Regional territories.
+* **Unified Dashboard Interface:** Designed a structured view for leads, opportunities, and accounts suitable for a sales team.
+* **Data Integrity:** Implemented Dataverse Alternate Keys and validation mechanisms to prevent duplicate CRM entries.
+* **System Integration:** Engineered logic to interface with external systems (Microsoft Teams and Office 365 Outlook) for state-change alerts.
 
 ---
 
 ## System Architecture
 
-The solution utilizes Dataverse as the primary data layer.
+The solution utilizes Dataverse as the primary data layer, demonstrating a decoupled and scalable architecture.
 
 ```mermaid
 graph TD
@@ -98,7 +99,7 @@ CRM-PowerApps-Workflow/
 ---
 
 ## Data Model Schema (Dataverse)
-The CRM relies on three primary Dataverse tables:
+The CRM demonstrates database normalization via three primary Dataverse tables:
 
 1. **`cr_Lead`**: Captures raw incoming inquiries.
 2. **`cr_Account`**: Represents a validated business entity.
@@ -108,25 +109,25 @@ The CRM relies on three primary Dataverse tables:
 
 ---
 
-## Core Workflows
+## Core Workflows Showcased
 
 ### 1. Lead Routing
 * **Trigger:** Row added to `cr_Lead`.
-* **Logic:** Evaluates the `cr_territory` field. If `North India` (Delhi NCR, Punjab, Haryana) or `West India` (Maharashtra, Gujarat), assigns to the respective regional sales queue (e.g. assigning to Regional Manager Amit Desai). Otherwise, routes to the Central Sales Queue managed by the inside sales team.
-* **Action:** Sends an Office 365 Email to the allocated owner.
+* **Logic:** Evaluates the `cr_territory` field. If `North India` or `West India`, assigns to the regional sales manager. Otherwise, routes to the Central Sales Queue.
+* **Action:** Sends an Office 365 Email to the allocated owner upon successful record assignment.
 
 ### 2. Opportunity Notification
 * **Trigger:** Status changes to "Won" on `cr_Opportunity`.
-* **Logic:** Retrieves Account and Revenue values.
-* **Action:** Posts an Adaptive Card into the "India Sales Wins" Microsoft Teams channel.
+* **Logic:** Retrieves linked Account and Revenue values using standard FetchXML operations in Power Automate.
+* **Action:** Constructs and posts an Adaptive Card into the relevant Microsoft Teams channel to notify the team.
 
 ---
 
-## Setup & Configuration
-To implement this inside a Power Platform Tenant:
+## Setup & Configuration Guide
+To import these structural examples into a Power Platform Tenant:
 
-1. Go to [Power Apps Maker Portal](https://make.powerapps.com).
+1. Navigate to the [Power Apps Maker Portal](https://make.powerapps.com).
 2. Validate you hold the **System Customizer** role.
-3. Import schemas from `src/dataverse_schema/` to establish baseline tables.
-4. Import the provided Flows from `src/workflows/` via the import wizard.
-5. Authorize connections for Office Outlook and Microsoft Teams connectors.
+3. Use the schemas in `src/dataverse_schema/` to define the custom tables natively.
+4. Import the provided Logic constructs from `src/workflows/`.
+5. Authorize credential handshakes for the Office Outlook and Microsoft Teams connections if necessary.
