@@ -3,28 +3,28 @@
   "description": "Routes new leads from Dataverse to the appropriate sales representative based on territory.",
   "trigger": {
     "type": "WhenARowIsAdded",
-    "table": "cr123_leads"
+    "table": "cr_leads"
   },
   "actions": [
     {
       "name": "ConditionTerritory",
       "type": "Condition",
-      "expression": "@equals(triggerOutputs()?['body/cr123_territory'], 'North America')",
+      "expression": "@or(equals(triggerOutputs()?['body/cr_territory'], 'North India'), equals(triggerOutputs()?['body/cr_territory'], 'West India'))",
       "ifTrue": {
         "actions": [
           {
             "name": "AssignOwner",
             "type": "UpdateRow",
-            "table": "cr123_leads",
-            "recordId": "@triggerOutputs()?['body/cr123_leadid']",
+            "table": "cr_leads",
+            "recordId": "@triggerOutputs()?['body/cr_leadid']",
             "changes": {
-              "ownerid@odata.bind": "systemusers(12345-abcde)"
+              "ownerid@odata.bind": "systemusers(amit-desai-id-1234)"
             }
           },
           {
             "name": "SendEmailNotification",
             "type": "SendEmailV2",
-            "to": "na-sales@company.com",
+            "to": "north-west-sales@company.in",
             "subject": "New Lead Assigned",
             "body": "A new lead has been assigned to your territory. Please check the PowerApp dashboard."
           }
@@ -35,10 +35,10 @@
           {
             "name": "AssignDefaultOwner",
             "type": "UpdateRow",
-            "table": "cr123_leads",
-            "recordId": "@triggerOutputs()?['body/cr123_leadid']",
+            "table": "cr_leads",
+            "recordId": "@triggerOutputs()?['body/cr_leadid']",
             "changes": {
-              "ownerid@odata.bind": "systemusers(67890-fghij)"
+              "ownerid@odata.bind": "systemusers(central-queue-id-5678)"
             }
           }
         ]

@@ -22,7 +22,7 @@
           {
             "name": "PostAdaptiveCardToTeams",
             "type": "TeamsPostCard",
-            "channelId": "19:sales-wins@thread.v2",
+            "channelId": "19:india-sales-wins@thread.v2",
             "message": {
               "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
               "type": "AdaptiveCard",
@@ -30,10 +30,9 @@
               "body": [
                 {
                   "type": "TextBlock",
-                  "text": "🎉 Deal Won!",
+                  "text": "Opportunity Closed Won",
                   "size": "ExtraLarge",
-                  "weight": "Bolder",
-                  "color": "Good"
+                  "weight": "Bolder"
                 },
                 {
                   "type": "TextBlock",
@@ -41,7 +40,7 @@
                 },
                 {
                   "type": "TextBlock",
-                  "text": "Revenue: $@{triggerOutputs()?['body/cr_estimatedrevenue']}"
+                  "text": "Revenue: INR @{triggerOutputs()?['body/cr_estimatedrevenue']}"
                 }
               ]
             }
