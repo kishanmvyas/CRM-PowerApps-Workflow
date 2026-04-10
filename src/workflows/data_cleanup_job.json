@@ -1,0 +1,5 @@
+{
+  "name": "DataCleanupJob",
+  "description": "Weekly cleanup job to remove old disqualified leads",
+  "trigger": { "type": "Recurrence", "frequency": "Week" }
+}

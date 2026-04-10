@@ -1,0 +1,53 @@
+{
+  "name": "OpportunityWonNotification",
+  "description": "Sends an Adaptive Card to the Sales Teams Channel when an opportunity is won.",
+  "trigger": {
+    "type": "WhenARowIsModified",
+    "table": "cr_opportunities",
+    "filteringAttributes": "cr_statusreason"
+  },
+  "actions": [
+    {
+      "name": "CheckIfWon",
+      "type": "Condition",
+      "expression": "@equals(triggerOutputs()?['body/cr_statusreason'], 'Won')",
+      "ifTrue": {
+        "actions": [
+          {
+            "name": "GetAccountDetails",
+            "type": "GetRow",
+            "table": "cr_accounts",
+            "recordId": "@triggerOutputs()?['body/_cr_accountid_value']"
+          },
+          {
+            "name": "PostAdaptiveCardToTeams",
+            "type": "TeamsPostCard",
+            "channelId": "19:sales-wins@thread.v2",
+            "message": {
+              "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+              "type": "AdaptiveCard",
+              "version": "1.3",
+              "body": [
+                {
+                  "type": "TextBlock",
+                  "text": "🎉 Deal Won!",
+                  "size": "ExtraLarge",
+                  "weight": "Bolder",
+                  "color": "Good"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Account: @{outputs('GetAccountDetails')?['body/cr_accountname']}"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Revenue: $@{triggerOutputs()?['body/cr_estimatedrevenue']}"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

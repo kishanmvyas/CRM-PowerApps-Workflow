@@ -1,0 +1,31 @@
+{
+  "tableName": "cr_account",
+  "displayName": "Account",
+  "description": "Stores information about businesses or organizations.",
+  "columns": [
+    {
+      "logicalName": "cr_accountid",
+      "displayName": "Account ID",
+      "type": "Uniqueidentifier",
+      "isPrimaryId": true
+    },
+    {
+      "logicalName": "cr_accountname",
+      "displayName": "Account Name",
+      "type": "String",
+      "maxLength": 160,
+      "isPrimaryName": true
+    },
+    {
+      "logicalName": "cr_industry",
+      "displayName": "Industry",
+      "type": "Picklist",
+      "options": ["Technology", "Healthcare", "Financial Services", "Manufacturing", "Retail"]
+    },
+    {
+      "logicalName": "cr_annualrevenue",
+      "displayName": "Annual Revenue",
+      "type": "Money"
+    }
+  ]
+}

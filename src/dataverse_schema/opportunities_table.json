@@ -1,0 +1,10 @@
+{
+  "tableName": "cr_opportunity",
+  "displayName": "Opportunity",
+  "columns": [
+    { "logicalName": "cr_opportunityid", "type": "Uniqueidentifier", "isPrimaryId": true },
+    { "logicalName": "cr_name", "type": "String", "isPrimaryName": true },
+    { "logicalName": "cr_estimatedrevenue", "type": "Money" },
+    { "logicalName": "cr_statusreason", "type": "Status", "options": ["Open", "Lost", "Won"] }
+  ]
+}
